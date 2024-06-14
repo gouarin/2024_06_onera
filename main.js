@@ -12,7 +12,7 @@ import RevealMath from 'reveal.js/plugin/math/math.js'
 import RevealMenu from './plugin.js'
 // import RevealMenu from 'reveal.js-menu/plugin.js'
 
-var url = "2024_02_amr_workshop";
+var url = "2024_06_onera";
 
 function get_theme_ext(href)
 {
