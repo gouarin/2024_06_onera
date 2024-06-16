@@ -987,6 +987,100 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
         <section>
           <div class="sl-block">
             <div class="header">
+              <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                PDEs</h1>
+            </div>
+            <div class="main">
+              <div class="row align-items-center" style="font-size: 15px">
+                <div class="col-7">
+                  <ul>
+                    <li>A strategy has been designed (PhD M. Duarte) relying on
+                      time-adaptive operator splitting with dynamically adapted
+                      mesh (multiresolution) with error control:</li>
+                    <ul>
+                      <li>optimal computational cost and parallelization
+                        properties
+                        when large splitting time steps compared to the smallest
+                        time scale can be taken without impairing precision</li>
+                    </ul>
+                    <li>We aim at resolving stiff PDEs with samurai and ponio
+                      (time
+                      integrators) libraries with the same computation favorable
+                      properties</li>
+                    <ul>
+                      <li>the same computational properties (local implicitation
+                        of the source term - allowing for vey stiff source with
+                        local time integration in space)</li>
+                      <li>explicit diffusion integration without von Neumann
+                        stability
+                        limit (ROCK)</li>
+                      <li>high-order in space and time integration of
+                        convection,
+                        including shocks</li>
+                      <li>strong acceleration through adaptation in space and
+                        time</li>
+                    </ul>
+                    <li>Stumbling block : what to do when reaction and
+                      diffusion
+                      coupled to the smallest time scale (complex
+                      chemistry)</li>
+                  </ul>
+                </div>
+                <div class="col-5">
+                  <div>
+                    <video data-autoplay loop="true"
+                      src="./figures/ignition_Re1000.mov" />
+                  </div>
+                  <div>
+                    <img src="./figures/splitting_time_steps.jpg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="sl-block">
+            <div class="header">
+              <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                PDEs</h1>
+            </div>
+            <div class="main">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <ul>
+                    <li>Keep reaction and diffusion coupled (IMEX) !</li>
+                    <li>No splitting time step limitation due to the coupling at
+                      small scale (complex chemistry and detailed transport in
+                      flames for example)</li>
+                    <li>Relying on the PIROCK strategy of G. Vilmart and A.
+                      Abdulle.</li>
+                    <li>Adaptation in space and time with error control</li>
+                    <li>Project with CEA on hydrogen risk - DNS combustion with
+                      detailed transport and CChem</li>
+                  </ul>
+                </div>
+                <div class="col-4 text-center">
+                  <div>
+                    <img id="adapt" width="50%"
+                      src="/light/figures/hpc@maths.png">
+                  </div>
+                  <div>
+                    <img width="50%" src="./figures/logo.png">
+                  </div>
+                  <div>
+                    <img width="50%" src="./figures/logo-cea.webp">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="sl-block">
+            <div class="header">
               <h1 class="title">HPC@Maths</h1>
             </div>
             <div class="main" style="font-size: 20px">
@@ -1061,21 +1155,6 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
         </section>
 
         <section>
-          <div class="sl-block">
-            <div class="header">
-              <h1 class="title">Scientific collaborations: NumPEx program</h1>
-            </div>
-            <div class="main" style="font-size: 20px">
-              <ul>
-                <li>2 PhD with CEA and INRIA (ExaMA WP1)</li>
-                <li>Engineer (ExaMA WP7)</li>
-                <li>Post-doc with CEA (ExaDost) </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section>
           <div class="row align-items-center">
             <div class="col-4">
               <video data-autoplay loop="true"
@@ -1112,6 +1191,37 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
           </div>
         </section>
 
+        <section>
+          <div class="sl-block">
+            <div class="header">
+              <h1 class="title">Back-up slides - ROCK method (PhD Abdulle 2001)
+              </h1>
+            </div>
+            <div class="main" style="font-size: 20px">
+              <div class="row align-items-center">
+                <div class="col-6 mr-0">
+                  <ul>
+                    <li>Large extension of a stability domain on the negative
+                      real line (~s2 key idea)</li>
+                    <li>Important gain in computational efficiency compared to
+                      standard ERK</li>
+                    <li>Allows to treat diffusion explicitly (even with very
+                      fine meshes) without impairing the time step stability
+                      limit</li>
+                  </ul>
+                </div>
+                <div class="col-6 text-center m-0">
+                  <div>
+                    <img src="./figures/stability_domain_rock_1.png">
+                  </div>
+                  <div>
+                    <img src="./figures/stability_domain_rock_2.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
     <script type="module" src="/main.js"></script>
