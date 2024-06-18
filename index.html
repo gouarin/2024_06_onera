@@ -475,7 +475,7 @@
                 <h1 class="title">Compression rates</h1>
               </div>
               <div class="main text-center">
-                <img  src="figures/p4est_3.png">
+                <img src="figures/p4est_3.png">
               </div>
             </div>
           </section>
@@ -634,7 +634,7 @@ set([&](const auto& i, auto)
           </section>
 
           <section>
-            <h1>Creation of random meshes and their graduation</h1>
+            <h2>Creation of random meshes and their graduation</h2>
             <hr>
           </section>
 
@@ -919,6 +919,123 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
               </div>
             </div>
           </section>
+
+          <section>
+            <h2>A dual Splitting/IMEX strategy for stiff
+              PDEs</h2>
+            <hr>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center" style="font-size: 15px">
+                  <div class="col-7">
+                    <ul>
+                      <li class="my-1">A strategy has been designed (PhD M.
+                        Duarte) relying
+                        on
+                        time-adaptive operator splitting with dynamically
+                        adapted
+                        mesh (multiresolution) with error control:</li>
+                      <ul class="mx-5 px-0">
+                        <li>optimal computational cost and parallelization
+                          properties
+                          when large splitting time steps compared to the
+                          smallest
+                          time scale can be taken without impairing
+                          precision</li>
+                      </ul>
+                      <li class="mt-3 mb-1">We aim at resolving stiff PDEs with
+                        samurai and ponio
+                        (time
+                        integrators) libraries with the same computation
+                        favorable
+                        properties</li>
+                      <ul class="mx-5 px-0">
+                        <li class="my-1">the same computational properties
+                          (local
+                          implicitation
+                          of the source term - allowing for very stiff source
+                          with
+                          local time integration in space)</li>
+                        <li class="my-1">explicit diffusion integration without
+                          von Neumann
+                          stability
+                          limit (ROCK)</li>
+                        <li class="my-1">high-order in space and time
+                          integration of
+                          convection,
+                          including shocks</li>
+                        <li class="my-1">strong acceleration through adaptation
+                          in space and
+                          time</li>
+                      </ul>
+                      <li class="mt-3">Stumbling block : what to do when
+                        reaction and
+                        diffusion
+                        coupled to the smallest time scale (complex
+                        chemistry)</li>
+                    </ul>
+                  </div>
+                  <div class="col-5">
+                    <div>
+                      <video data-autoplay loop="true"
+                        src="./figures/ignition_Re1000.mov" />
+                    </div>
+                    <div>
+                      <img src="./figures/splitting_time_steps.jpg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <ul>
+                      <li>Keep reaction and diffusion coupled (IMEX) !</li>
+                      <li>No splitting time step limitation due to the coupling
+                        at
+                        small scale (complex chemistry and detailed transport in
+                        flames for example)</li>
+                      <li>Relying on the PIROCK strategy of G. Vilmart and A.
+                        Abdulle.</li>
+                      <li>Adaptation in space and time with error control</li>
+                      <li>Project with CEA on hydrogen risk - DNS combustion
+                        with
+                        detailed transport and CChem</li>
+                    </ul>
+                  </div>
+                  <div class="col-4 text-center">
+                    <div>
+                      <img id="adapt" width="50%"
+                        src="/light/figures/hpc@maths.png">
+                    </div>
+                    <div>
+                      <img width="50%" src="./figures/logo.png">
+                    </div>
+                    <div>
+                      <img width="50%" src="./figures/logo-cea.webp">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section>
             <div class="sl-block">
               <div class="header">
@@ -948,139 +1065,6 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
         <section>
           <div class="sl-block">
             <div class="header">
-              <h1 class="title">Roadmap</h1>
-            </div>
-            <div class="main text-center">
-              <img id="adapt" src="/light/figures/roadmap.png">
-              <!--
-              <ul>
-                <li>Implement various finite volume schemes</li>
-                <li>Implement various lattice Boltzmann schemes</li>
-                <li>Implement various discontinuous Galerkin schemes</li>
-                <li>Ponio integration</li>
-                <li>Python and Fortran bindings</li>
-                <li>Implement point-based multiresolution</li>
-              </ul> -->
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="sl-block">
-            <div class="header">
-              <h1 class="title">Roadmap in the NumPeX context</h1>
-            </div>
-            <div class="main">
-              <ul>
-                <li>Optimization</li>
-                <li>Flexibility in term of container choice</li>
-                <li>Parallel backends</li>
-                <li>Load balancing using diffusion algorithm or space filling
-                  curves</li>
-                <li>GPU support</li>
-                <li>IO optimization and compression</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="sl-block">
-            <div class="header">
-              <h1 class="title">A dual Splitting/IMEX strategy for stiff
-                PDEs</h1>
-            </div>
-            <div class="main">
-              <div class="row align-items-center" style="font-size: 15px">
-                <div class="col-7">
-                  <ul>
-                    <li>A strategy has been designed (PhD M. Duarte) relying on
-                      time-adaptive operator splitting with dynamically adapted
-                      mesh (multiresolution) with error control:</li>
-                    <ul>
-                      <li>optimal computational cost and parallelization
-                        properties
-                        when large splitting time steps compared to the smallest
-                        time scale can be taken without impairing precision</li>
-                    </ul>
-                    <li>We aim at resolving stiff PDEs with samurai and ponio
-                      (time
-                      integrators) libraries with the same computation favorable
-                      properties</li>
-                    <ul>
-                      <li>the same computational properties (local implicitation
-                        of the source term - allowing for vey stiff source with
-                        local time integration in space)</li>
-                      <li>explicit diffusion integration without von Neumann
-                        stability
-                        limit (ROCK)</li>
-                      <li>high-order in space and time integration of
-                        convection,
-                        including shocks</li>
-                      <li>strong acceleration through adaptation in space and
-                        time</li>
-                    </ul>
-                    <li>Stumbling block : what to do when reaction and
-                      diffusion
-                      coupled to the smallest time scale (complex
-                      chemistry)</li>
-                  </ul>
-                </div>
-                <div class="col-5">
-                  <div>
-                    <video data-autoplay loop="true"
-                      src="./figures/ignition_Re1000.mov" />
-                  </div>
-                  <div>
-                    <img src="./figures/splitting_time_steps.jpg">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="sl-block">
-            <div class="header">
-              <h1 class="title">A dual Splitting/IMEX strategy for stiff
-                PDEs</h1>
-            </div>
-            <div class="main">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <ul>
-                    <li>Keep reaction and diffusion coupled (IMEX) !</li>
-                    <li>No splitting time step limitation due to the coupling at
-                      small scale (complex chemistry and detailed transport in
-                      flames for example)</li>
-                    <li>Relying on the PIROCK strategy of G. Vilmart and A.
-                      Abdulle.</li>
-                    <li>Adaptation in space and time with error control</li>
-                    <li>Project with CEA on hydrogen risk - DNS combustion with
-                      detailed transport and CChem</li>
-                  </ul>
-                </div>
-                <div class="col-4 text-center">
-                  <div>
-                    <img id="adapt" width="50%"
-                      src="/light/figures/hpc@maths.png">
-                  </div>
-                  <div>
-                    <img width="50%" src="./figures/logo.png">
-                  </div>
-                  <div>
-                    <img width="50%" src="./figures/logo-cea.webp">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <div class="sl-block">
-            <div class="header">
               <h1 class="title">HPC@Maths</h1>
             </div>
             <div class="main" style="font-size: 20px">
@@ -1093,7 +1077,7 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
               <p>The main goals of this team are</p>
               <img id="adapt" src="/light/figures/actions.png">
               <div class="text-center">
-                <p>PI: L.G and M. Massot -
+                <p>PI: Loïc Gouarin and Marc Massot -
                   <a
                     href="https://initiative-hpc-maths.gitlab.labos.polytechnique.fr/site/index.html">HPC@Maths
                     website</a></p>
@@ -1155,6 +1139,45 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
         </section>
 
         <section>
+          <div class="sl-block">
+            <div class="header">
+              <h1 class="title">Roadmap</h1>
+            </div>
+            <div class="main text-center">
+              <img id="adapt" src="/light/figures/roadmap.png">
+              <!--
+              <ul>
+                <li>Implement various finite volume schemes</li>
+                <li>Implement various lattice Boltzmann schemes</li>
+                <li>Implement various discontinuous Galerkin schemes</li>
+                <li>Ponio integration</li>
+                <li>Python and Fortran bindings</li>
+                <li>Implement point-based multiresolution</li>
+              </ul> -->
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="sl-block">
+            <div class="header">
+              <h1 class="title">Roadmap in the NumPeX context</h1>
+            </div>
+            <div class="main">
+              <ul>
+                <li>Optimization</li>
+                <li>Flexibility in term of container choice</li>
+                <li>Parallel backends</li>
+                <li>Load balancing using diffusion algorithm or space filling
+                  curves</li>
+                <li>GPU support</li>
+                <li>IO optimization and compression</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
           <div class="row align-items-center">
             <div class="col-4">
               <video data-autoplay loop="true"
@@ -1174,6 +1197,87 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
             </div>
             <div class="col">
               <img src="./figures/plasma.png">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="sl-block">
+            <div class="header">
+              <h1 class="title" style="font-size: 30px;">Opening: High-order
+                adaptive coupling ONERA /
+                CMAP
+              </h1>
+            </div>
+            <div class="main">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <ul>
+                    <li class="my-1" style="font-size: 20px">Easy-to-use,
+                      precise, stable coupling strategy</li>
+                    <ul class="mx-3 px-0" style="font-size: 14px">
+                      <li class="my-1">High-order, polynomial-in-time
+                        representations of
+                        coupling variables</li>
+                      <li class="my-1">Dynamic error estimation to drive $\Delta
+                        t$</li>
+                      <li class="my-1">Implicit iterative variant for improved
+                        stability</li>
+                      <li class="my-1">Minimally intrusive</li>
+                    </ul>
+                    <li class="mt-3 mb-1" style="font-size: 20px">Research
+                      project at ONERA + PhD</li>
+                    <ul class="mx-3 px-0" style="font-size: 14px">
+                      <li class="my-1">Detailed theoretical analysis</li>
+                      <li class="my-1">Development of CWIPI 2.0 with time
+                        coupling<br>
+                        →plug-and-play interface for space-time coupling</li>
+                      <li class="my-1">Demonstrations :</li>
+                      <ul class="mx-3 px-0">
+                        <li class="my-1">various applications : fluid-plasma,
+                          fluid-structure,
+                          heat transfer…</li>
+                        <li class="my-1">and codes : CEDRE, SoniCs, Taranis,
+                          Zset, Yales2,
+                          Modethec, Aghora…</li>
+                      </ul>
+                      <li class="my-1">Link with NumPEx, CORIA, NASA</li>
+
+                    </ul>
+                  </ul>
+                </div>
+                <div class="col-6 text-center">
+                  <div>
+                    <img src="./figures/cwipi_2.png">
+                  </div>
+                  <div>
+                    <img width="60%" src="./figures/cwipi_1.png">
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 row text-center" style="font-size: 10px;">
+                <p class="my-1">PhD in preparation within the French Exascale
+                  program NumPEx - ExaMA (ONERA / CMAP / SafranTech / CORIA) -
+                  Antoine Simon</p>
+                <p class="my-1">Open-source Python demonstrator Rhapsopy, Really
+                  High-order AdaPtive coupling for Simulation Orchestration in
+                  PYthon <a
+                    href="https://github.com/hpc-maths/Rhapsopy">Github</a></p>
+                <p class="my-1">François L. PhD 2022 Multiphysical modelling and
+                  simulation of the ignition transient of complete solid rocket
+                  motors - <a
+                    href="https://theses.hal.science/tel-03670668">https://theses.hal.science/tel-03670668</a></p>
+                <p class="my-1">François, L. and Massot, M. (2023) Multistep
+                  interface coupling for high-order adaptive black-box
+                  multiphysics simulations, 10th Int. Conf. on Comp. Methods for
+                  Coupled Problems in Science and Engineering</p>
+                <p class="my-1">Asad, A. De Loubens, R., François, L. and
+                  Massot, M. (2024), High-order adaptive multi-domain time
+                  integration scheme for microscale lithium-ion batteries
+                  simulations, Submitted - available on <a
+                    href="https://hal.science/hal-04234011v1">Hal</a> and
+                  ArXiv.</p>
+              </div>
             </div>
           </div>
         </section>
