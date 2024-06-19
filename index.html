@@ -677,12 +677,12 @@ ca[start_level] = {start_level, box};
                 <h1 class="title">Add cells randomly</h1>
               </div>
               <div class="main">
-                <pre><code class="cpp">
-samurai::CellList&lt;dim&gt; cl;
+                <pre><code class="cpp">samurai::CellList&lt;dim&gt; cl;
 
 samurai::for_each_interval(ca, [&](std::size_t level, const auto& interval, const auto& index)
 {
-    auto choice = xt::random::choice(xt::xtensor_fixed&lt;bool, xt::xshape&lt;2&gt;&gt;{true, false}, interval.size());
+    auto choice = xt::random::choice(xt::xtensor_fixed&lt;bool,
+                                     xt::xshape&lt;2&gt;&gt;{true, false}, interval.size());
 
     for(int i = interval.start, ic = 0; i&lt;interval.end; ++i, ++ic)
     {
@@ -1039,6 +1039,202 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
           <section>
             <div class="sl-block">
               <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center" style="font-size: 16px;">
+                  <div class="col-6">
+                    <p>Ignition and Combustion (Verwer & Hundsdorfer)</p>
+                    <p>Specific for RKC methods and ROCK</p>
+                    $$
+                    u_t = d \Delta u + \frac{R}{\alpha \delta} (1 + \alpha -
+                    u)
+                    e^{\delta( 1 - 1/u )} \quad \text{in }
+                    [0,1]\times[0,1]\\
+                    $$
+                    <div class="text-center">
+                      <img width="60%" class="text-center"
+                        src="/figures/combustion2d.png">
+                    </div>
+                  </div>
+                  <div class="col-6 text-center  fragment">
+
+                    <section data-markdown style="font-size: 12px;">
+                      | | PIROCK | ROCK2 | ROCK4 |
+                      |------------------------------------|-------------|------------|-----------|
+                      |Tolerance used | 1e-5 | 1e-6 | 1e-5 |
+                      |L2 norm of error | 1.84e-4 | 2.27e-4 | 2.69e-4 |
+                      |Elapsed time (s) | 7.97 | 1.90 | 0.42 |
+                      |Nb. time steps. | 889 | 157 | 57 |
+                      |Nb. time steps rejected | 0 | 0 | 0 |
+                      |Nb. function evaluation | - | 6367 | 1734 |
+                      |Nb. function evaluation (diffusion) | 8304 | - | - |
+                      |Nb. function evaluation (reaction) | 360067655 | - | -
+                      |
+                    </section>
+                    <p class="mt-0"><small> between $t=0.29$ and
+                        $t=0.32$.</small></p>
+                    <div class="fragment">
+                      <div class="border border-2">
+                        <p>IMEX reasonable overhead compared to fully explicit
+                          methods (ROCK2 - ROCK4) even in this very difficult
+                          configuration</p>
+                        <ul class="list-unstyled text-center">
+                          <li class="my-1">Error control</li>
+                          <li class="my-1">Good BC treatment</li>
+                          <li class="my-1">No splitting errors</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center">
+                  <div class="col-6" style="font-size: 14px">
+                    Belousov-Zhabotinsky (very stiff source - 3 eq)
+                    $$
+                    \left\{
+                    \begin{aligned}
+                    \partial_t a - D_a \, \Delta a &= \frac{1}{\mu} ( -qa - ab
+                    +
+                    fc) \\
+                    \partial_t b - D_b \, \Delta b &= \frac{1}{\varepsilon} (
+                    qa
+                    - ab + b\,(1-b)) \\
+                    \partial_t c - D_c \, \Delta c &= b - c
+                    \end{aligned}
+                    \right.
+                    $$
+                    <ul class="px-0">
+
+                      <li>Error to the reference quasi-exact solution is
+                        second
+                        order in time but not of the same origin (splitting
+                        error
+                        vs. IMEX error) - but still error control</li>
+                      <li>Larger time step can be taken with IMEX while
+                        keeping
+                        a
+                        proper solution (no disastrous splitting errors -
+                        wrong
+                        wave speed)</li>
+                      <li>When optimal large splitting time step is taken,
+                        IMEX
+                        as
+                        efficient as splitting, whereas it is advantageous for
+                        smaller time steps as well as larger time steps</li>
+                      <li>No boundary condition problems</li>
+                      <li>Same computational good properties</li>
+
+                    </ul>
+                  </div>
+                  <div class="col-6 text-center">
+                    <img width="48%" class="my-0" src="/figures/bz_b_t=0.png">
+                    <img width="48%" class="my-0" src="/figures/bz_b_t=1.png">
+                    <br>
+                    <img width="48%" class="my-0" src="/figures/bz_b_t=2.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center">
+                  <div class="col-6" style="font-size: 14px">
+                    Belousov-Zhabotinsky (very stiff source - 3 eq)
+                    $$
+                    \left\{
+                    \begin{aligned}
+                    \partial_t a - D_a \, \Delta a &= \frac{1}{\mu} ( -qa - ab
+                    +
+                    fc) \\
+                    \partial_t b - D_b \, \Delta b &= \frac{1}{\varepsilon} (
+                    qa
+                    - ab + b\,(1-b)) \\
+                    \partial_t c - D_c \, \Delta c &= b - c
+                    \end{aligned}
+                    \right.
+                    $$
+                    <ul class="px-0">
+
+                      <li>Error to the reference quasi-exact solution is
+                        second
+                        order in time but not of the same origin (splitting
+                        error
+                        vs. IMEX error) - but still error control</li>
+                      <li>Larger time step can be taken with IMEX while
+                        keeping
+                        a
+                        proper solution (no disastrous splitting errors -
+                        wrong
+                        wave speed)</li>
+                      <li>When optimal large splitting time step is taken,
+                        IMEX
+                        as
+                        efficient as splitting, whereas it is advantageous for
+                        smaller time steps as well as larger time steps</li>
+                      <li>No boundary condition problems</li>
+                      <li>Same computational good properties</li>
+
+                    </ul>
+                  </div>
+                  <div class="col-6 text-center">
+                    <div>
+                      <section data-markdown style="font-size: 12px;">
+                        | | PIROCK (tol=5e-3) | STRANG (dt=2/128) |
+                        |------------------------------|:------------------:|:--------------------:|
+                        |L2 norm of error (variable b) | 3.31e-2 | 1.14e-1 |
+                        |L2 norm of error (variable c) | 2.92e-3 | 1.37e-2 |
+                        |Elapsed time (s) | 6.91 | 6.70 |
+                        |Nb. time steps. | 624 | 128 |
+
+                        &nbsp;
+
+                        | | PIROCK (tol=1e-3) | STRANG (dt=2/512) |
+                        |------------------------------|:------------------:|:--------------------:|
+                        |L2 norm of error (variable b) | 4.94e-3 | 1.55e-3 |
+                        |L2 norm of error (variable c) | 4.31e-4 | 1.41e-4 |
+                        |Elapsed time (s) | 13.33 | 17.20 |
+                        |Nb. time steps. | 1528 | 512 |
+
+                        &nbsp;
+
+                        | | PIROCK (tol=1e-4) | STRANG (dt=2/16384) |
+                        |------------------------------|:------------------:|:--------------------:|
+                        |L2 norm of error (variable b) | 7.72e-6 | 1.81e-5 |
+                        |L2 norm of error (variable c) | 6.97e-7 | 1.57e-6 |
+                        |Elapsed time (s) | 165.12 | 427.81 |
+                        |Nb. time steps. | 31728 | 16384 |
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
                 <h1 class="title">Key point</h1>
               </div>
               <div class="main text-center">
@@ -1048,15 +1244,15 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                 </p>
                 <p>and</p>
 
-                <p class="fragment"><span>you have explicit and implicit
+                <p><span>you have explicit and implicit
                     at your disposal</span></p>
-                <p class="fragment"><span>you have a large range of time
+                <p><span>you have a large range of time
                     schemes
                     available</span></p>
-                <p class="fragment"><span>you have the adaptation (MRA / AMR)
+                <p><span>you have the adaptation (MRA / AMR)
                     without further effort
                   </span></p>
-                <p class="fragment"><span>you have parallelism</span></p>
+                <p><span>you have parallelism</span></p>
               </div>
             </div>
           </section>
@@ -1069,7 +1265,8 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
             </div>
             <div class="main" style="font-size: 20px">
               <p>samurai is part of the projects developed in the HPC@Maths
-                team (5 permanent researchers, 5 research engineers, 1 project
+                team (5 permanent researchers, 5 research engineers, 1
+                project
                 manager, 11
                 research
                 associates, 6 PhD students, 1 Post-doc).</p>
@@ -1093,7 +1290,8 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
             </div>
             <div class="main" style="font-size: 18px">
               <ul>
-                <li><span>Lattice Boltzmann methods and multiresolution</span>
+                <li><span>Lattice Boltzmann methods and
+                    multiresolution</span>
                   -
                   <strong>Thomas
                     Bellotti</strong> (IRMA/Université Strasbourg) and
@@ -1103,7 +1301,8 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                   <strong>Alejandro Alvarez</strong> (LPP/Ecole
                   polytechnique) and <strong>Louis
                     Reboul</strong> (ONERA)</li>
-                <li><span>Direct numerical simulation of lithium-ion batteries
+                <li><span>Direct numerical simulation of lithium-ion
+                    batteries
                     based
                     on high-resolution 3D images of porous electrode
                     microstructures</span> - <strong>Ali Asad</strong>
@@ -1124,12 +1323,14 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                   <strong>Marica Pelanti</strong> (ENSTA/IP Paris)</li>
                 <li><span>Mathematical modeling and simulation of
                     non-equilibrium
-                    plasmas for the prediction of electric propulsion</span> -
+                    plasmas for the prediction of electric propulsion</span>
+                  -
                   <strong>Zoubaïr Tazakkati</strong> (CMAP/Ecole
                   polytechnique)</li>
                 <li><span>Simulation analysis on the Hydrogen risk</span> -
                   <strong>Luc Lecointre</strong>, <strong>Pierre-Alexandre
-                    Masset</strong>, <strong>Etienne Studer</strong> (CEA) and
+                    Masset</strong>, <strong>Etienne Studer</strong> (CEA)
+                  and
                   <strong>Christian
                     Tenaud</strong> (EM2C/Université
                   Paris-Saclay)</li>
@@ -1168,7 +1369,8 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                 <li>Optimization</li>
                 <li>Flexibility in term of container choice</li>
                 <li>Parallel backends</li>
-                <li>Load balancing using diffusion algorithm or space filling
+                <li>Load balancing using diffusion algorithm or space
+                  filling
                   curves</li>
                 <li>GPU support</li>
                 <li>IO optimization and compression</li>
@@ -1219,9 +1421,11 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                       <li class="my-1">High-order, polynomial-in-time
                         representations of
                         coupling variables</li>
-                      <li class="my-1">Dynamic error estimation to drive $\Delta
+                      <li class="my-1">Dynamic error estimation to drive
+                        $\Delta
                         t$</li>
-                      <li class="my-1">Implicit iterative variant for improved
+                      <li class="my-1">Implicit iterative variant for
+                        improved
                         stability</li>
                       <li class="my-1">Minimally intrusive</li>
                     </ul>
@@ -1231,10 +1435,12 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                       <li class="my-1">Detailed theoretical analysis</li>
                       <li class="my-1">Development of CWIPI 2.0 with time
                         coupling<br>
-                        →plug-and-play interface for space-time coupling</li>
+                        →plug-and-play interface for space-time
+                        coupling</li>
                       <li class="my-1">Demonstrations :</li>
                       <ul class="mx-3 px-0">
-                        <li class="my-1">various applications : fluid-plasma,
+                        <li class="my-1">various applications :
+                          fluid-plasma,
                           fluid-structure,
                           heat transfer…</li>
                         <li class="my-1">and codes : CEDRE, SoniCs, Taranis,
@@ -1256,20 +1462,27 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                 </div>
               </div>
               <div class="mt-3 row text-center" style="font-size: 10px;">
-                <p class="my-1">PhD in preparation within the French Exascale
-                  program NumPEx - ExaMA (ONERA / CMAP / SafranTech / CORIA) -
+                <p class="my-1">PhD in preparation within the French
+                  Exascale
+                  program NumPEx - ExaMA (ONERA / CMAP / SafranTech / CORIA)
+                  -
                   Antoine Simon</p>
-                <p class="my-1">Open-source Python demonstrator Rhapsopy, Really
-                  High-order AdaPtive coupling for Simulation Orchestration in
+                <p class="my-1">Open-source Python demonstrator Rhapsopy,
+                  Really
+                  High-order AdaPtive coupling for Simulation Orchestration
+                  in
                   PYthon <a
                     href="https://github.com/hpc-maths/Rhapsopy">Github</a></p>
-                <p class="my-1">François L. PhD 2022 Multiphysical modelling and
-                  simulation of the ignition transient of complete solid rocket
+                <p class="my-1">François L. PhD 2022 Multiphysical modelling
+                  and
+                  simulation of the ignition transient of complete solid
+                  rocket
                   motors - <a
                     href="https://theses.hal.science/tel-03670668">https://theses.hal.science/tel-03670668</a></p>
                 <p class="my-1">François, L. and Massot, M. (2023) Multistep
                   interface coupling for high-order adaptive black-box
-                  multiphysics simulations, 10th Int. Conf. on Comp. Methods for
+                  multiphysics simulations, 10th Int. Conf. on Comp. Methods
+                  for
                   Coupled Problems in Science and Engineering</p>
                 <p class="my-1">Asad, A. De Loubens, R., François, L. and
                   Massot, M. (2024), High-order adaptive multi-domain time
@@ -1298,16 +1511,19 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
         <section>
           <div class="sl-block">
             <div class="header">
-              <h1 class="title">Back-up slides - ROCK method (PhD Abdulle 2001)
+              <h1 class="title">Back-up slides - ROCK method (PhD Abdulle
+                2001)
               </h1>
             </div>
             <div class="main" style="font-size: 20px">
               <div class="row align-items-center">
                 <div class="col-6 mr-0">
                   <ul>
-                    <li>Large extension of a stability domain on the negative
+                    <li>Large extension of a stability domain on the
+                      negative
                       real line (~s2 key idea)</li>
-                    <li>Important gain in computational efficiency compared to
+                    <li>Important gain in computational efficiency compared
+                      to
                       standard ERK</li>
                     <li>Allows to treat diffusion explicitly (even with very
                       fine meshes) without impairing the time step stability

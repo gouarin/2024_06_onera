@@ -232,21 +232,21 @@ section.has-dark-background h6 {
   list-style-type: decimal;
 }
 
-.reveal ul {
+/* .reveal ul {
   list-style-type: disc;
-}
+} */
 
 .reveal ul li {
   margin: 0 20px 20px 0;
 }
 
-.reveal ul ul {
+/* .reveal ul ul {
   list-style-type: square;
 }
 
 .reveal ul ul ul {
   list-style-type: circle;
-}
+} */
 
 .reveal ul.myclass {
   list-style-type: none;
