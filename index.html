@@ -1058,6 +1058,36 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                         src="/figures/combustion2d.png">
                     </div>
                   </div>
+                  <div class="col-6 text-center">
+                    <img width="80%" src="/figures/combustion.svg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sl-block">
+              <div class="header">
+                <h1 class="title">A dual Splitting/IMEX strategy for stiff
+                  PDEs</h1>
+              </div>
+              <div class="main">
+                <div class="row align-items-center" style="font-size: 16px;">
+                  <div class="col-6">
+                    <p>Ignition and Combustion (Verwer & Hundsdorfer)</p>
+                    <p>Specific for RKC methods and ROCK</p>
+                    $$
+                    u_t = d \Delta u + \frac{R}{\alpha \delta} (1 + \alpha -
+                    u)
+                    e^{\delta( 1 - 1/u )} \quad \text{in }
+                    [0,1]\times[0,1]\\
+                    $$
+                    <div class="text-center">
+                      <img width="60%" class="text-center"
+                        src="/figures/combustion2d.png">
+                    </div>
+                  </div>
                   <div class="col-6 text-center  fragment">
 
                     <section data-markdown style="font-size: 12px;">
@@ -1087,7 +1117,6 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                         </ul>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -1317,10 +1346,13 @@ for(std::size_t ite=0; ite&lt;200; ++ite)
                 <li><span>Low-Mach reactive flows</span> - <strong>Christian
                     Tenaud</strong> (EM2C/Université
                   Paris-Saclay)</li>
-                <li><span>Interfacial flow simulation</span> -
-                  <strong>Giuseppe
-                    Orlando</strong> (CMAP/Ecole polytechnique) and
-                  <strong>Marica Pelanti</strong> (ENSTA/IP Paris)</li>
+                <li><span>Interfacial flow simulation</span> - <strong>Giuseppe
+                    Orlando</strong> and <strong>Ward Haegeman</strong>
+                  (CMAP/Ecole polytechnique), <strong>Joël Dupays</strong> and
+                  <strong>Clément Le Touze</strong> (ONERA), <strong>Marica
+                    Pelanti</strong> (ENSTA/IP Paris), <strong>Khaled
+                    Saleh</strong> (Université de Lyon), <strong>Jean-Marc
+                    Hérard</strong> (EDF)</li>
                 <li><span>Mathematical modeling and simulation of
                     non-equilibrium
                     plasmas for the prediction of electric propulsion</span>
